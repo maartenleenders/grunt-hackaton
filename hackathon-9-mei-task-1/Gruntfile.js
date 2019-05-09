@@ -42,8 +42,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-sass");
 
   // Define aliases here.
-  grunt.registerTask("default", "My default task description", function() {
-    grunt.log.writeln( "This is the default grunt task, create a new task and configure." );
-  });
+  grunt.registerTask( "task1", "Copy files, sass them, and create a compressed folder.", function() {
+    grunt.task.run( "copy", "sass", "compress" );
+  } );
+  grunt.registerTask( "default", "The default", function() {
+    grunt.task.run( "task1" );
+  } )
 
 };
