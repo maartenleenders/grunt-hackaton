@@ -7,16 +7,16 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON("package.json"),
     copy: {
       assets: {
-        cwd: "<%= files.sourceFiles.path %>",
-        src: "<%= files.sourceFiles.mask %>",
-        dest: "<%= files.assets.path %>",
+        cwd: "source-files/",
+        src: "*",
+        dest: "assets/",
         expand: true,
       }
     },
     sass: {
       dist: {
         files: {
-          "source-files/style.css": "source-files/style.scss",
+          "assets/style.css": "assets/style.scss",
         },
       },
     },
@@ -24,24 +24,16 @@ module.exports = function(grunt) {
       main: {
         options: {
           archive: "exports/export.zip",
+          mode: "zip",
         },
         files: [ {
-          cwd: "<%= files.assets.path =>",
-          src: "<%= files.assets.mask =>",
+          expand: true,
+          cwd: "assets/",
+          src: [ "script.js", "style.css", "!*.css.map"],
           dest: "exports/",
         } ],
       }
     },
-    files: {
-      sourceFiles: {
-        path: "source-files/",
-        mask: [ "*.js", "*.css", "!*.css.map"],
-      },
-      assets: {
-        path: "assets/",
-        mask: "*",
-      },
-    }
   });
   // Load tasks here.
 
